@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        
+        #container {
+             /* margin-top: 50px ;
+    margin: 0px auto; */
+            width: auto;
+            height: auto;
+            /* border: 10px #333 solid;  */
+        }
+
+        #videoElement {
+            width: 500px;
+            height: 375px;
+
+        }
+
+        .no-padding {
+            padding-left: 0;
+            padding-right: 0;
+            
+        }
+
+        #f_style {
+            width: 100%;
+            height: 70%;
+            margin-left: 10px;
+
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:400,600');
+
+        * {
+            outline: none;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        .page {
+            width: auto;
+            height: auto;
+            background: #fdfdfd;
+            font-family: 'Encode Sans Condensed', sans-serif;
+            font-weight: 600;
+            letter-spacing: .03em;
+            color: #212121;
+        }
+
+        header {
+            display: flex;
+            position: fixed;
+            width: 100%;
+            height: 70px;
+            background: #212121;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        main {
+            padding: 70px 20px 0;
+            display: -webkit-inline-flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        main>div {
+            margin: top;
+            max-width: auto;
+            justify-content: center;
+        }
+
+        main h2 span {
+            color: #BF7497;
+        }
+
+        main p {
+            line-height: 1.5;
+            font-weight: 200;
+            margin: 20px 0;
+        }
+
+        main small {
+            font-weight: 300;
+            color: #888;
+        }
+
+        #nav-container {
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        #nav-container .bg {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 70px);
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
+            background: #000;
+        }
+
+        #nav-container:focus-within .bg {
+            visibility: visible;
+            opacity: .6;
+        }
+
+        #nav-container * {
+            visibility: visible;
+        }
+
+        .button {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
+            -webkit-appearance: none;
+            border: 0;
+            background: transparent;
+            border-radius: 0;
+            height: 70px;
+            width: 30px;
+            cursor: pointer;
+            pointer-events: auto;
+            margin-left: 25px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .icon-bar {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #aaa;
+            transition: .3s;
+        }
+
+        .icon-bar+.icon-bar {
+            margin-top: 5px;
+        }
+
+        #nav-container:focus-within .button {
+            pointer-events: none;
+        }
+
+        #nav-container:focus-within .icon-bar:nth-of-type(1) {
+            transform: translate3d(0, 8px, 0) rotate(45deg);
+        }
+
+        #nav-container:focus-within .icon-bar:nth-of-type(2) {
+            opacity: 0;
+        }
+
+        #nav-container:focus-within .icon-bar:nth-of-type(3) {
+            transform: translate3d(0, -8px, 0) rotate(-45deg);
+        }
+
+        #nav-content {
+            margin-top: 70px;
+            padding: 20px;
+            width: 90%;
+            max-width: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: calc(100% - 70px);
+            background: #ececec;
+            pointer-events: auto;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            transform: translateX(-100%);
+            transition: transform .3s;
+            will-change: transform;
+            contain: paint;
+        }
+
+        #nav-content ul {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #nav-content li a {
+            padding: 10px 5px;
+            display: block;
+            text-transform: uppercase;
+            transition: color .1s;
+        }
+
+        #nav-content li a:hover {
+            color: #BF7497;
+        }
+
+        #nav-content li:not(.small)+.small {
+            margin-top: auto;
+        }
+
+        .small {
+            display: flex;
+            align-self: center;
+        }
+
+        .small a {
+            font-size: 12px;
+            font-weight: 400;
+            color: #888;
+        }
+
+        .small a+a {
+            margin-left: 15px;
+        }
+
+        #nav-container:focus-within #nav-content {
+            transform: none;
+        }
+        /* * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        } */
+
+        html,
+        body {
+            height: auto;
+        }
+
+        a,
+        a:visited,
+        a:focus,
+        a:active,
+        a:link {
+            text-decoration: none;
+            outline: 0;
+        }
+
+        a {
+            color: currentColor;
+            transition: .2s ease-in-out;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: auto;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        img {
+            vertical-align: middle;
+            height: auto;
+            width: 100%;
+        }
+        .Neon {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #494949;
+            position: relative;
+        }
+        .Neon * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+
+        .Neon-input-dragDrop {
+            display: block;
+            width: 343px;
+            margin: 0 auto 25px auto;
+            padding: 25px;
+            color: #8d9499;
+            color: #97A1A8;
+            background: #fff;
+            border: 2px dashed #C8CBCE;
+            text-align: center;
+            justify-content: center;
+            -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+            -moz-transition: box-shadow 0.3s, border-color 0.3s;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .Neon-input-dragDrop .Neon-input-icon {
+            font-size: 48px;
+            margin-top: -10px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .Neon-input-text h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .Neon-input-text span {
+            font-size: 12px;
+        }
+
+        .Neon-input-choose-btn.blue {
+            color: #008BFF;
+            border: 1px solid #008BFF;
+        }
+
+        .Neon-input-choose-btn {
+            display: inline-block;
+            padding: 8px 14px;
+            outline: none;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: bold;
+            color: #8d9496;
+            border-radius: 3px;
+            border: 1px solid #c6c6c6;
+            vertical-align: middle;
+            background-color: #fff;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+            -webkit-transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div  class="page">
+        <header tabindex="0">OCR on Hindi Handwritten
+            Text</header>
+        <div id="nav-container">
+            <div class="bg"></div>
+            <div class="button" tabindex="0">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+            <div id="nav-content" tabindex="0">
+                <ul>
+                    <li><a href="#0">Home</a></li>
+                    <li><a href="#0">Services</a></li>
+                    <li><a href="#0">Blog</a></li>
+                    <li><a href="#0">About</a></li>
+                    <li><a href="#0">Contact</a></li>
+                    <li class="small"><a href="#0">Facebook</a><a href="#0">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <table border="0" align="center" cellpadding="" >
+        <th>
+            <!-- file upload -->
+
+
+            <main>
+
+                <div class="Neon Neon-theme-dragdropbox">
+                    <form action="{% url 'home'%}"  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.img }}
+                        <div class="Neon-input-dragDrop">
+                            <div class="Neon-input-inner">
+                                <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                <div class="Neon-input-text">
+                                    <h3>Drag&amp;Drop files here</h3> <span
+                                        style="display:inline-block; margin: 15px 0">or</span>
+                                </div><a class="Neon-input-choose-btn blue">Browse Files</a>
+                            </div>
+                        </div>
+                    <button class="btn-lg btn-success" type="submit"> Submit </button>
+                    </form>
+                </div>
+            </main>
+
+        </th>
+        <th>
+            <canvas id="CANVAS" name="CANVAS" width="400" height="350">Your browser does not support Canvas.</canvas>
+
+
+            <div id="container" name='cont' class="container-fluid no-padding ">
+                <video autoplay="true" id="videoElement" name='vid'>
+
+                </video>
+            </div>
+
+            <a id="download" download="face.jpg"></form>
+                <button onclick="myFunction(); download();" align="center" style="margin: 20px 250px auto "
+                    class="btn btn-primary dropdown-toggle" type="button">capture</button></a>
+        </th>
+
+
+
+    </table>
+
+    <script>
+
+        function download() {
+            var download = document.getElementById("download");
+            var image = document.getElementById("CANVAS").toDataURL("image/png")
+                .replace("image/jpg", "image/octet-stream");
+            download.setAttribute("href", image);
+            //download.setAttribute("download","archive.png");
+        }
+
+
+
+
+
+        var video = document.querySelector("#videoElement");
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                    console.log("Something went wrong!");
+                });
+            var i = 0;
+            function myFunction() {
+                var x = document.getElementById("CANVAS");
+                var ctx = x.getContext("2d");
+                ctx.fillStyle = "#FF0000";
+
+                ctx.drawImage(video, 0, 0, 400, 350);
+
+                //ctx.fillRect(20, 20, 150, 100);
+
+                if (i < 10) {
+                    document.body.appendChild(x);
+                    i = i + 1;
+                };
+
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

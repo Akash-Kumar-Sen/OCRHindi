@@ -1,0 +1,1 @@
+web: gunicorn ocrhindi.wsgi --log-file -
